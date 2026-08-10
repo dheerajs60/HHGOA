@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Image as ImageIcon, Sparkles, CheckCircle2, RefreshCw } from 'lucide-react';
+import { Image as ImageIcon, CheckCircle2, RefreshCw } from 'lucide-react';
 import { useGeneratorStore } from '../store/useGeneratorStore';
 import { convertHeicIfNeeded } from '../lib/heicConvert';
 
