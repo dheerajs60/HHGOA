@@ -87,8 +87,6 @@ export function App() {
                   </div>
                 )}
 
-                {/* 3. Beach Bag Perks Showcase */}
-                {format !== 'squad' && <BeachBagDisplay />}
               </div>
 
               {/* Right Column: Live Composite Retina Preview & Actions (5 cols, sticky on desktop) */}
@@ -109,6 +107,9 @@ export function App() {
                     <li>Each card includes an invite QR code back to the generator</li>
                   </ul>
                 </div>
+
+                {/* 3. Beach Bag Perks Showcase (Moved below preview for better mobile UX) */}
+                {format !== 'squad' && <BeachBagDisplay />}
               </div>
 
             </div>

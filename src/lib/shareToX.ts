@@ -37,17 +37,19 @@ export async function shareBoardingPassToX(options: ShareOptions): Promise<Share
   // Trigger PNG Download so user has the actual image file ready
   triggerDownload(blob, filename);
 
-  // Clipboard copy image (fire and forget, do not await!)
+  // Clipboard copy image (await to catch errors and use Safari workaround)
   let copiedToClipboard = false;
   if (typeof navigator !== 'undefined' && navigator.clipboard && typeof ClipboardItem !== 'undefined') {
-    navigator.clipboard.write([
-      new ClipboardItem({ 'image/png': blob }),
-    ]).then(() => {
-      console.debug('Clipboard write success');
-    }).catch(e => {
-      console.debug('Clipboard write image failed', e);
-    });
-    copiedToClipboard = true; // Assume success for UI message
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'image/png': Promise.resolve(blob),
+        }),
+      ]);
+      copiedToClipboard = true;
+    } catch (e) {
+      console.warn('Clipboard write image failed', e);
+    }
   }
 
   return {
