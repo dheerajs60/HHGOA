@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Download, Share2, Copy, Check, X, Sparkles } from 'lucide-react';
 import { useGeneratorStore } from '../store/useGeneratorStore';
 import { shareBoardingPassToX, triggerDownload } from '../lib/shareToX';
-import { uploadToImgBB } from '../lib/imgbb';
 import { generateDeterministicProfile } from '../lib/seededGenerator';
 
 interface ResultScreenProps {

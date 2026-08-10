@@ -1,5 +1,3 @@
-import { uploadToImgBB } from './imgbb';
-
 export interface ShareOptions {
   blob: Blob;
   filename: string;
@@ -25,7 +23,6 @@ export async function shareBoardingPassToX(options: ShareOptions): Promise<Share
 
   const file = new File([blob], filename, { type: 'image/png' });
   const shareText = `Just claimed my Boarding Pass to Paradise for @HHGoa 2026! 🌴✈️\n\nBuilder Class: ${builderClass}\nGate/Seat: ${gate} · ${seat}\n\nStamp your passport and get assigned your builder class 👇\n#FrameInGoa #HackerHouseGoa`;
-  const shareUrl = window.location.origin;
 
   // Check if Web Share API Level 2 with files is supported
   const canUseWebShare = typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] });
