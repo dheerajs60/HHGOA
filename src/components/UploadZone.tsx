@@ -3,25 +3,7 @@ import { Image as ImageIcon, Sparkles, CheckCircle2, RefreshCw } from 'lucide-re
 import { useGeneratorStore } from '../store/useGeneratorStore';
 import { convertHeicIfNeeded } from '../lib/heicConvert';
 
-// Sample demo avatars so users can preview immediately
-const DEMO_AVATARS = [
-  {
-    name: 'Beach Hacker',
-    url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Dev Nomad',
-    url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Ship Sorcerer',
-    url: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Async Lead',
-    url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80',
-  },
-];
+
 
 export const UploadZone: React.FC = () => {
   const { imageSrc, setImageSrc, setCrop, setZoom, setRotation } = useGeneratorStore();
@@ -54,12 +36,7 @@ export const UploadZone: React.FC = () => {
     }
   };
 
-  const selectDemoAvatar = (url: string) => {
-    setImageSrc(url);
-    setCrop({ x: 0, y: 0 });
-    setZoom(1);
-    setRotation(0);
-  };
+
 
   return (
     <div className="w-full space-y-3">
@@ -124,7 +101,19 @@ export const UploadZone: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center justify-center mt-1">
+          <div className="flex items-center justify-center gap-2 mt-1">
+            {imageSrc && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setImageSrc(null);
+                }}
+                className="px-4 py-2 rounded-xl bg-transparent text-[#E4D8BE] font-bold text-sm tracking-wide border-2 border-[#111111] hover:bg-[#111111] hover:text-[#F4C430]"
+              >
+                Remove
+              </button>
+            )}
             <span className="px-5 py-2 rounded-xl bg-[#E8146B] text-white font-bold text-sm tracking-wide border-2 border-[#111111] shadow-comic hover:bg-[#ff2581]">
               Browse Files
             </span>
@@ -132,33 +121,7 @@ export const UploadZone: React.FC = () => {
         </div>
       </div>
 
-      {/* Demo Starters for Instant 1-Click Try */}
-      <div className="pt-1">
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="text-[11px] font-bold font-stamp text-[#E4D8BE] flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-[#F4C430]" /> OR TRY WITH SAMPLE HACKERS:
-          </span>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {DEMO_AVATARS.map((demo) => (
-            <button
-              key={demo.name}
-              type="button"
-              onClick={() => selectDemoAvatar(demo.url)}
-              className="group relative flex flex-col items-center p-1 rounded-xl bg-[#07241C] border border-[#111111] hover:border-[#F4C430] transition-all overflow-hidden"
-            >
-              <img
-                src={demo.url}
-                alt={demo.name}
-                className="w-11 h-11 rounded-lg object-cover border border-[#111111] group-hover:scale-105 transition-transform"
-              />
-              <span className="text-[10px] font-bold text-[#E4D8BE] mt-1 truncate w-full text-center">
-                {demo.name}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
+
     </div>
   );
 };

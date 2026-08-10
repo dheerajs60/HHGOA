@@ -23,7 +23,7 @@ export const BuilderIdForm: React.FC = () => {
   const deterministic = generateDeterministicProfile(
     profile.name,
     profile.role || 'Full Stack',
-    profile.tagline
+    profile.stackOrProject
   );
 
   return (

@@ -14,6 +14,7 @@ import { Sparkles, Terminal, Waves } from 'lucide-react';
 export function App() {
   const { format, imageSrc } = useGeneratorStore();
   const [showResultModal, setShowResultModal] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#07241C] text-[#F5EFE0] flex flex-col justify-between selection:bg-[#E8146B] selection:text-white">
@@ -38,60 +39,81 @@ export function App() {
           </p>
         </div>
 
-        {/* Format Selector Bar */}
-        <div className="max-w-3xl mx-auto mb-6">
-          <FormatToggle />
-        </div>
+        {!hasStarted ? (
+          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center max-w-4xl mx-auto px-4">
+            <h2 className="font-display text-5xl sm:text-7xl text-[#F4C430] tracking-wide leading-none text-shadow-comic mb-6">
+              READY TO BUILD IN GOA?
+            </h2>
+            <p className="text-lg sm:text-xl font-semibold text-[#E4D8BE] max-w-2xl mx-auto mb-10">
+              Join the elite hacker squadron at Hacker House Goa 2026. Generate your deterministic builder class, boarding pass, and squad frame right now.
+            </p>
+            <button
+              type="button"
+              onClick={() => setHasStarted(true)}
+              className="flex items-center justify-center gap-3 py-5 px-10 rounded-2xl bg-[#E8146B] text-white font-display text-3xl tracking-wider border-4 border-[#111111] shadow-comic-xl hover:bg-[#ff2581] active:translate-x-1 active:translate-y-1 transition-all cursor-pointer hover:-rotate-1"
+            >
+              <Sparkles className="w-8 h-8 text-[#F4C430]" />
+              <span>CREATE BOARDING PASS</span>
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Format Selector Bar */}
+            <div className="max-w-3xl mx-auto mb-6">
+              <FormatToggle />
+            </div>
 
-        {/* 2-Column Responsive Workspace */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          
-          {/* Left Column: Airport Check-in Controls & Forms (7 cols) */}
-          <div className="lg:col-span-7 space-y-5">
-            {/* 1. Upload Dropzone / Camera */}
-            <div className="p-4 rounded-3xl bg-[#0B3B2E] border-3 border-[#111111] shadow-comic">
-              {format === 'squad' ? (
-                <SquadFrameBuilder />
-              ) : (
-                <div className="space-y-4">
-                  <UploadZone />
-                  {imageSrc && <CropStage />}
+            {/* 2-Column Responsive Workspace */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              
+              {/* Left Column: Airport Check-in Controls & Forms (7 cols) */}
+              <div className="lg:col-span-7 space-y-5">
+                {/* 1. Upload Dropzone / Camera */}
+                <div className="p-4 rounded-3xl bg-[#0B3B2E] border-3 border-[#111111] shadow-comic">
+                  {format === 'squad' ? (
+                    <SquadFrameBuilder />
+                  ) : (
+                    <div className="space-y-4">
+                      <UploadZone />
+                      {imageSrc && <CropStage />}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            {/* 2. Builder Manifest Form (Only in Boarding Pass / PFP mode) */}
-            {format !== 'squad' && (
-              <div className="p-4 rounded-3xl bg-[#0B3B2E] border-3 border-[#111111] shadow-comic">
-                <BuilderIdForm />
+                {/* 2. Builder Manifest Form (Only in Boarding Pass / PFP mode) */}
+                {format !== 'squad' && (
+                  <div className="p-4 rounded-3xl bg-[#0B3B2E] border-3 border-[#111111] shadow-comic">
+                    <BuilderIdForm />
+                  </div>
+                )}
+
+                {/* 3. Beach Bag Perks Showcase */}
+                {format !== 'squad' && <BeachBagDisplay />}
               </div>
-            )}
 
-            {/* 3. Beach Bag Perks Showcase */}
-            {format !== 'squad' && <BeachBagDisplay />}
-          </div>
+              {/* Right Column: Live Composite Retina Preview & Actions (5 cols, sticky on desktop) */}
+              <div className="lg:col-span-5 lg:sticky lg:top-6 space-y-4">
+                <div className="p-5 rounded-3xl bg-[#0B3B2E] border-3 border-[#111111] shadow-comic">
+                  <CardPreview onOpenResultModal={() => setShowResultModal(true)} />
+                </div>
 
-          {/* Right Column: Live Composite Retina Preview & Actions (5 cols, sticky on desktop) */}
-          <div className="lg:col-span-5 lg:sticky lg:top-6 space-y-4">
-            <div className="p-5 rounded-3xl bg-[#0B3B2E] border-3 border-[#111111] shadow-comic">
-              <CardPreview onOpenResultModal={() => setShowResultModal(true)} />
-            </div>
-
-            {/* Micro-Instructions for X Post */}
-            <div className="p-4 rounded-2xl bg-[#07241C] border-2 border-[#111111] text-xs font-mono-code text-[#E4D8BE] shadow-comic">
-              <div className="text-[#F4C430] font-bold font-stamp text-sm mb-1 flex items-center gap-1.5">
-                <Terminal className="w-4 h-4 text-[#E8146B]" />
-                SUBMISSION INSTRUCTIONS:
+                {/* Micro-Instructions for X Post */}
+                <div className="p-4 rounded-2xl bg-[#07241C] border-2 border-[#111111] text-xs font-mono-code text-[#E4D8BE] shadow-comic">
+                  <div className="text-[#F4C430] font-bold font-stamp text-sm mb-1 flex items-center gap-1.5">
+                    <Terminal className="w-4 h-4 text-[#E8146B]" />
+                    SUBMISSION INSTRUCTIONS:
+                  </div>
+                  <ul className="space-y-1 list-disc list-inside text-gray-300">
+                    <li>Share your boarding pass with <span className="text-[#E8146B] font-bold">#FrameInGoa</span></li>
+                    <li>Tag your squad teammates in the post</li>
+                    <li>Each card includes an invite QR code back to the generator</li>
+                  </ul>
+                </div>
               </div>
-              <ul className="space-y-1 list-disc list-inside text-gray-300">
-                <li>Share your boarding pass with <span className="text-[#E8146B] font-bold">#FrameInGoa</span></li>
-                <li>Tag your squad teammates in the post</li>
-                <li>Each card includes an invite QR code back to the generator</li>
-              </ul>
-            </div>
-          </div>
 
-        </div>
+            </div>
+          </>
+        )}
       </main>
 
       {/* Result Modal */}

@@ -77,7 +77,7 @@ const ALL_BEACH_BAG_ITEMS: BeachBagItem[] = [
   { name: 'VS Code Dark Modern', category: 'Editor', iconName: 'code', emoji: '💻' },
   { name: 'Zinc Sunscreen SPF 100', category: 'Survival', iconName: 'sun', emoji: '🧴' },
   { name: 'Noise-Cancelling Cans', category: 'Focus', iconName: 'headphones', emoji: '🎧' },
-  { name: 'Kingfisher Ultra Chilled', category: 'Fuel', iconName: 'beer', emoji: '🍺' },
+  { name: 'Fresh Kokum Soda', category: 'Fuel', iconName: 'cup-soda', emoji: '🥤' },
   { name: '60% Lubed Keyboard', category: 'Gear', iconName: 'keyboard', emoji: '⌨️' },
   { name: 'Curved Surfboard 6\'2"', category: 'Sport', iconName: 'waves', emoji: '🏄‍♂️' },
   { name: 'Lo-Fi Sunset Playlist', category: 'Vibe', iconName: 'music', emoji: '📻' },

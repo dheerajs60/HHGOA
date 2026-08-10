@@ -18,7 +18,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ isOpen, onClose }) =
 
   if (!isOpen || !generatedDataUrl || !generatedBlob) return null;
 
-  const meta = generateDeterministicProfile(profile.name, profile.role || 'Full Stack', profile.tagline);
+  const meta = generateDeterministicProfile(profile.name, profile.role || 'Full Stack', profile.stackOrProject);
   const builderClass = profile.customClass || meta.builderClass;
 
   const handleDownload = () => {
