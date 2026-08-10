@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-hh-green: #0B3B2E;
+    --color-hh-dark-green: #07241C;
+    --color-hh-cream: #F5EFE0;
+    --color-hh-cream-dark: #E4D8BE;
+    --color-hh-pink: #E8146B;
+    --color-hh-pink-light: #FF2E83;
+    --color-hh-gold: #F4C430;
+    --color-hh-gold-dark: #D4A317;
+    --color-hh-black: #111111;
+  }
+
+  body {
+    background-color: var(--color-hh-dark-green);
+    color: var(--color-hh-cream);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+/* Custom Typography Utility Classes */
+.font-display {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.font-stamp {
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Hard Comic Shadows */
+.shadow-comic {
+  box-shadow: 4px 4px 0px #111111;
+}
+
+.shadow-comic-lg {
+  box-shadow: 6px 6px 0px #111111;
+}
+
+.shadow-comic-xl {
+  box-shadow: 8px 8px 0px #111111;
+}
+
+.shadow-comic-pink {
+  box-shadow: 4px 4px 0px #E8146B;
+}
+
+.shadow-comic-gold {
+  box-shadow: 4px 4px 0px #F4C430;
+}
+
+.shadow-comic-green {
+  box-shadow: 4px 4px 0px #0B3B2E;
+}
+
+.text-shadow-comic {
+  text-shadow: 2px 2px 0px #111111;
+}
+
+.text-shadow-comic-lg {
+  text-shadow: 4px 4px 0px #111111;
+}
+
+.text-shadow-gold {
+  text-shadow: 3px 3px 0px #111111, 0 0 12px rgba(244, 196, 48, 0.4);
+}
+
+.text-shadow-pink {
+  text-shadow: 3px 3px 0px #111111, 0 0 14px rgba(232, 20, 107, 0.5);
+}
+
+/* Background Textures */
+.bg-diagonal-hatching {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(245, 239, 224, 0.04) 0px,
+    rgba(245, 239, 224, 0.04) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(244, 196, 48, 0.15) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+
+.bg-cream-paper {
+  background-color: #F5EFE0;
+  background-image: radial-gradient(rgba(17, 17, 17, 0.04) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* Perforated ticket lines & notches */
+.ticket-perforation-v {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #111111 0px,
+    #111111 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  width: 2px;
+}
+
+.ticket-perforation-h {
+  background-image: repeating-linear-gradient(
+    to right,
+    #111111 0px,
+    #111111 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  height: 2px;
+}
+
+/* Stamp Drop Keyframe Animation */
+@keyframes stamp-slam {
+  0% {
+    transform: scale(2.2) rotate(-24deg);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  60% {
+    transform: scale(0.92) rotate(2deg);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  80% {
+    transform: scale(1.05) rotate(-4deg);
+  }
+  100% {
+    transform: scale(1) rotate(-2deg);
+    opacity: 1;
+  }
+}
+
+@keyframes card-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-3px, 4px) rotate(-0.5deg); }
+  40% { transform: translate(4px, -3px) rotate(0.5deg); }
+  60% { transform: translate(-2px, -2px) rotate(0.2deg); }
+  80% { transform: translate(2px, 1px) rotate(-0.2deg); }
+}
+
+.animate-stamp-slam {
+  animation: stamp-slam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-card-shake {
+  animation: card-shake 0.35s ease-in-out;
+}
+
+/* Scanline and holographic shimmer */
+@keyframes shimmer {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(250%) rotate(25deg); }
+}
+
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    transparent 20%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg);
+  animation: shimmer 4s infinite linear;
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07241C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0B3B2E;
+  border-radius: 4px;
+  border: 1px solid #F4C430;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E8146B;
+}
