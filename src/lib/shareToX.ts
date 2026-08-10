@@ -24,24 +24,9 @@ export async function shareBoardingPassToX(options: ShareOptions): Promise<Share
   const file = new File([blob], filename, { type: 'image/png' });
   const shareText = `Just claimed my Boarding Pass to Paradise for @HHGoa 2026! 🌴✈️\n\nBuilder Class: ${builderClass}\nGate/Seat: ${gate} · ${seat}\n\nStamp your passport and get assigned your builder class 👇\n#FrameInGoa #HackerHouseGoa`;
 
-  // Check if Web Share API Level 2 with files is supported
-  const canUseWebShare = typeof navigator !== 'undefined' && navigator.canShare && navigator.canShare({ files: [file] });
-
-  if (canUseWebShare) {
-    try {
-      await navigator.share({
-        title: `HH Goa 2026 — ${name}'s Boarding Pass`,
-        text: shareText,
-        files: [file],
-      });
-      return { method: 'web_share', success: true, message: 'Shared via native sheet with image attached!' };
-    } catch (err: unknown) {
-      if ((err as Error).name === 'AbortError') {
-        return { method: 'web_share', success: false, message: 'Share sheet dismissed' };
-      }
-      console.warn('Web share failed, proceeding with fallback:', err);
-    }
-  }
+  // We explicitly bypass the native OS share sheet (navigator.share)
+  // because the user requested that this button MUST route directly to X (Twitter),
+  // rather than showing generic app options.
 
   // Fallback: X Intent
   const tweetUrl = new URL('https://twitter.com/intent/tweet');
