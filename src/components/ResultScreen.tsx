@@ -29,7 +29,6 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ isOpen, onClose }) =
     const res = await shareBoardingPassToX({
       blob: generatedBlob,
       filename,
-      name: profile.name,
       builderClass,
       format,
       gate: meta.gate,

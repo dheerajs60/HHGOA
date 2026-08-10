@@ -1,7 +1,6 @@
 export interface ShareOptions {
   blob: Blob;
   filename: string;
-  name: string;
   builderClass: string;
   format: string;
   gate: string;
@@ -19,9 +18,8 @@ export interface ShareResult {
  * or fallback with ImgBB upload, or instant clipboard copy.
  */
 export async function shareBoardingPassToX(options: ShareOptions): Promise<ShareResult> {
-  const { blob, filename, name, builderClass, gate, seat } = options;
+  const { blob, filename, builderClass, gate, seat } = options;
 
-  const file = new File([blob], filename, { type: 'image/png' });
   const shareText = `Just claimed my Boarding Pass to Paradise for @HHGoa 2026! 🌴✈️\n\nBuilder Class: ${builderClass}\nGate/Seat: ${gate} · ${seat}\n\nStamp your passport and get assigned your builder class 👇\n#FrameInGoa #HackerHouseGoa`;
 
   // We explicitly bypass the native OS share sheet (navigator.share)
